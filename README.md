@@ -9,14 +9,14 @@ A curated collection of OpenClaw skills optimized for high-performance multi-age
 - **Coding Agent**: Delegation of complex coding tasks to specialized sub-agents.
 - **GitHub**: Deep integration for PR management, issue tracking, and CI/CD.
 
-### 🧠 Coordination & Strategy
-- **Wiki-Mesh**: Passive context synchronization and "Project War Rooms."
-- **Ontology**: Structured knowledge graph for linking entities, projects, and people.
-- **Gemini**: High-speed research, summarization, and one-shot generation.
+### 🧠 Coordination & Knowledge (Wiki-Mesh)
+- **War Rooms**: Project-scoped memory injection and "Passive Handshakes."
+- **Ontology**: Structured knowledge graph for anchoring ephemeral state to permanent entities.
+- **Visual Mapping**: Automated Mermaid graph generation for knowledge discovery.
 
 ### 🌐 Intelligence & Operations
-- **BlogWatcher**: Monitoring RSS/Atom feeds for industry and competitive intelligence.
-- **Google Workspace (GOG)**: Seamless control over Gmail, Calendar, and Drive.
+- **BlogWatcher**: Monitoring RSS/Atom feeds for industry intelligence.
+- **Google Workspace (GOG)**: Control over Gmail, Calendar, and Drive.
 - **Slack**: Advanced channel management and notification orchestration.
 
 ## 🚀 How to Use

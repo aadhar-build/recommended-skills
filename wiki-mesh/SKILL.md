@@ -12,7 +12,7 @@ To contribute to a War Room, you MUST append the following tag to the bottom of 
 ## Tooling
 This skill includes the `wiki-mesh` CLI toolset:
 - `wiki-mesh ingest`: Scans for new tags and moves findings to the project inbox.
-- `wiki-mesh read <ProjectName>`: Returns the current War Room synthesis for a project.
+- `wiki-mesh flush <ProjectName>`: (NEW) Triggers an immediate ingestion and synthesis, then signals that the session context is ready to be flushed for a clean handoff.
 
 ## Constraints
 - **Do not** manually edit War Room files in `_wiki/war-rooms/`. They are managed by the automated synthesis engine.

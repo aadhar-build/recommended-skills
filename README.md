@@ -6,6 +6,7 @@ A curated collection of OpenClaw skills optimized for high-performance multi-age
 
 ### 🏗️ Engineering & Execution
 - **Superpowers Mode**: Strict engineering workflow (Spec -> Plan -> TDD -> Review).
+- **Karpathy Filter**: (NEW) Behavioral guidelines to reduce coding mistakes and bloat.
 - **Coding Agent**: Delegation of complex coding tasks to specialized sub-agents.
 - **GitHub**: Deep integration for PR management, issue tracking, and CI/CD.
 

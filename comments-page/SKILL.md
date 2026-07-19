@@ -11,11 +11,26 @@ Turns a Markdown file into a live, navigable, commentable web page reachable onl
 
 Any time you'd otherwise post a doc for the user to review and comment on — PRDs, charters, plans, findings write-ups — and they need to react to *specific* passages, not the doc as a whole.
 
-## One hub, not one server per doc
+## One hub per machine, not one server per doc
 
-There is one standing multi-doc hub instance on this box: `/root/.argo/master-cv-review`, live at `http://100.66.85.101:7432/`. **Check whether it's already running (`ss -tlnp | grep 7432`, or `curl -s http://100.66.85.101:7432/api/docs`) before ever spinning up a new port.** A new doc means adding a subdirectory to the existing hub, not a new instance — port sprawl was the old (wrong) default.
+A hub can live on any machine reachable over the user's tailnet — the box this session is running on, or a separate always-on VPS the user already operates. **Which machine to use is the user's call, not a default to assume** — if it's not already obvious from context, ask, rather than guessing a remote box when the session is running locally (or vice versa). Deploying to a different machine than the one this session is running on requires shell access to *that* machine (ssh or equivalent) — don't assume it's available; confirm before treating that as the plan.
 
-Only create a genuinely separate instance/port if the user explicitly asks for an isolated one-off (rare).
+Known hub instances so far (check first — there may be others; ask the user if unsure which one they mean):
+- `http://100.66.85.101:7432/` — a standing multi-doc hub on a VPS, hosting several unrelated review docs.
+- `http://100.77.245.96:7440/` — a hub on the user's own Mac, hosting the `voiceink` multi-page site (see "Multi-page sites" below).
+
+**Before ever spinning up a new port on a given machine, check whether a hub is already running there** (`ss -tlnp | grep <port>` on Linux / `lsof -i :<port>` on macOS, or `curl -s http://<tailscale-ip>:<port>/api/docs`). A new doc on a machine that already has a hub means adding a subdirectory to the existing hub, not a new instance — port sprawl was the old (wrong) default.
+
+Only create a genuinely separate instance/port on the same machine if the user explicitly asks for an isolated one-off (rare).
+
+## Multi-page sites (grouped docs)
+
+A `meta.json` may set `"group"` (e.g. `"voiceink"`) and `"order"` (int, default 0). Docs sharing a `group` render as one cohesive site rather than independent pages:
+
+- The hub root (`hub.html`) sections grouped docs under a heading per group, sorted by `order` within the group; ungrouped docs still render as a flat list beneath, unchanged from the original behavior.
+- Every page in the group (`index.html`) gets a persistent sidebar nav section listing every sibling page (title, sorted by `order`, current page highlighted) — above that page's own local heading TOC. This is what makes it read as a real multi-page site with navigation, not a set of disconnected docs you have to return to the hub root to switch between.
+
+Use this whenever the user wants several related docs (overview, architecture, progress, roadmap, ...) to feel like one site — not a fresh hub per related doc.
 
 ## Phase 1: Add a doc to the hub
 
@@ -24,7 +39,7 @@ Inside the hub's `docs/` directory, create `docs/<slug>/`:
 - `annotations.json` — starts as `[]`.
 - `meta.json` — `{"title": "..."}`. The server auto-discovers any subdirectory with a `meta.json` — no code changes needed to register a new doc.
 
-The hub's `server.py`, `index.html`, and `hub.html` are generic and shared across all docs — copy them from `server_template.py` / `index_template.html` / `hub_template.html` in this skill dir only when bootstrapping the hub itself or picking up a skill update, never per-doc.
+The hub's `server.py`, `index.html`, `hub.html`, and `watch_annotations.sh` are generic and shared across all docs — copy them from `server_template.py` / `index_template.html` / `hub_template.html` / `watch_annotations.sh` in this skill dir only when bootstrapping the hub itself or picking up a skill update, never per-doc.
 
 **If the hub isn't running yet** (fresh box, or it was killed): `BIND_HOST` = the machine's Tailscale interface IP (`tailscale ip -4`), never `0.0.0.0`/`127.0.0.1` — this is what makes it Tailscale-only without touching `ufw`. Pick an unused port (check `ss -tlnp`). Launch: `nohup python3 server.py > server.log 2>&1 & disown` from the hub directory.
 
@@ -65,8 +80,8 @@ Only fire a `PushNotification` when the reply needs the user's attention *now* (
 
 ## API (implemented by server_template.py)
 
-- `GET /` → hub.html (lists every doc under `docs/`)
-- `GET /api/docs` → JSON array of `{slug, title}` for every doc with a `meta.json`
+- `GET /` → hub.html (lists every doc under `docs/`, grouped per "Multi-page sites" above)
+- `GET /api/docs` → JSON array of `{slug, title, group, order}` for every doc with a `meta.json` (`group`/`order` are `null`/`0` when unset)
 - `GET /d/<slug>` → index.html (the doc viewer; front-end JS reads the slug from the URL path)
 - `GET /api/<slug>/doc` → raw Markdown text of that doc's `DOC.md`
 - `GET /api/<slug>/annotations` → JSON array
@@ -76,4 +91,4 @@ Only fire a `PushNotification` when the reply needs the user's attention *now* (
 
 ## Navigation
 
-`index_template.html` auto-generates a sticky sidebar table of contents from the rendered doc's headings (h1/h2/h3) — no manual maintenance, works for any doc. Long docs (multi-section PRDs, charters) get real in-page navigation instead of one long scroll.
+`index_template.html` auto-generates a sticky sidebar table of contents from the rendered doc's headings (h1/h2/h3) — no manual maintenance, works for any doc. Long docs (multi-section PRDs, charters) get real in-page navigation instead of one long scroll. Grouped docs additionally get the cross-page site nav described in "Multi-page sites" above, rendered in the same sidebar.

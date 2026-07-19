@@ -11,6 +11,13 @@ Bespoke doc type: if docs/<slug>/custom.html exists, it's served verbatim at
 live dashboards, or anything that isn't a commentable prose doc. No
 annotations/comment API for these; they're self-contained static pages.
 
+Multi-page sites: a doc's meta.json may set "group" (e.g. "voiceink") and
+"order" (int, default 0). Docs sharing a group render as one site with
+persistent cross-page navigation in index.html's sidebar (see index_template.html),
+not just a flat hub listing — /api/docs includes group/order so the front-end
+can build that nav. Docs with no group behave exactly as before (standalone,
+listed only on the hub root).
+
 Fill in BIND_HOST/PORT below, then run: nohup python3 server.py > server.log 2>&1 & disown
 """
 import json
@@ -43,7 +50,12 @@ def list_docs():
             continue
         with open(meta_path) as f:
             meta = json.load(f)
-        docs[slug] = {"title": meta.get("title", slug), "dir": d}
+        docs[slug] = {
+            "title": meta.get("title", slug),
+            "dir": d,
+            "group": meta.get("group"),
+            "order": meta.get("order", 0),
+        }
     return docs
 
 
@@ -108,7 +120,10 @@ class Handler(BaseHTTPRequestHandler):
             return
 
         if path == "/api/docs":
-            self._send_json([{"slug": s, "title": v["title"]} for s, v in docs.items()])
+            self._send_json([
+                {"slug": s, "title": v["title"], "group": v["group"], "order": v["order"]}
+                for s, v in docs.items()
+            ])
             return
 
         if path.startswith("/d/"):

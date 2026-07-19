@@ -84,11 +84,16 @@
   .status-line { position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel); border-top: 1px solid var(--border);
     padding: 6px 20px; font-size: 0.72rem; color: var(--muted); text-align: center; }
   .hint { font-size: 0.72rem; color: var(--muted); margin: 4px 0 0; }
+  #site-nav { margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  #site-nav .site-nav-label { color: var(--muted); font-size: 0.72rem; text-transform: uppercase; margin-bottom: 6px; }
+  #site-nav a { display: block; color: var(--muted); text-decoration: none; padding: 3px 0; font-size: 0.82rem; }
+  #site-nav a:hover { color: var(--accent); }
+  #site-nav a.current { color: var(--accent); font-weight: 700; }
 </style>
 </head>
 <body>
 <div class="layout">
-  <nav id="toc"><a href="/" style="display:block; margin-bottom:10px; font-size:0.78rem;">&larr; All docs</a><div style="color:var(--muted); font-size:0.72rem; text-transform:uppercase; margin-bottom:8px;">On this page</div></nav>
+  <nav id="toc"><a href="/" style="display:block; margin-bottom:10px; font-size:0.78rem;">&larr; All docs</a><div id="site-nav"></div><div style="color:var(--muted); font-size:0.72rem; text-transform:uppercase; margin-bottom:8px;">On this page</div></nav>
   <div class="main">
     <div id="doc-content">Loading…</div>
     <p class="hint">Select any text above to leave a comment right there — a "+ Comment" button will appear.</p>
@@ -188,6 +193,24 @@ function slugify(s, seen) {
   return slug;
 }
 
+async function buildSiteNav() {
+  const nav = document.getElementById('site-nav');
+  try {
+    const res = await fetch('/api/docs');
+    const docs = await res.json();
+    const current = docs.find(d => d.slug === DOC_SLUG);
+    const group = current ? current.group : null;
+    if (!group) { nav.innerHTML = ''; return; }
+    const siblings = docs.filter(d => d.group === group).sort((a, b) => (a.order || 0) - (b.order || 0));
+    const label = group.charAt(0).toUpperCase() + group.slice(1);
+    nav.innerHTML = `<div class="site-nav-label">${label}</div>` + siblings.map(d =>
+      `<a href="/d/${d.slug}" class="${d.slug === DOC_SLUG ? 'current' : ''}">${d.title}</a>`
+    ).join('');
+  } catch (e) {
+    nav.innerHTML = '';
+  }
+}
+
 function buildToc(container) {
   const toc = document.getElementById('toc');
   const seen = new Set();
@@ -284,8 +307,9 @@ async function loadDoc() {
     container.innerHTML = renderMarkdown(md);
     const h1 = container.querySelector('h1');
     if (h1 && !h1.querySelector('.tag')) h1.insertAdjacentHTML('beforeend', ' <span class="tag draft">DRAFT — OPEN FOR COMMENT</span>');
-    document.getElementById('toc').innerHTML = '<a href="/" style="display:block; margin-bottom:10px; font-size:0.78rem;">&larr; All docs</a><div style="color:var(--muted); font-size:0.72rem; text-transform:uppercase; margin-bottom:8px;">On this page</div>';
+    document.getElementById('toc').innerHTML = '<a href="/" style="display:block; margin-bottom:10px; font-size:0.78rem;">&larr; All docs</a><div id="site-nav"></div><div style="color:var(--muted); font-size:0.72rem; text-transform:uppercase; margin-bottom:8px;">On this page</div>';
     buildToc(container);
+    buildSiteNav();
 
     const ols = container.querySelectorAll('ol');
     const oq = ols.length ? ols[ols.length - 1] : null;

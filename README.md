@@ -14,6 +14,7 @@ A curated collection of OpenClaw skills optimized for high-performance multi-age
 - **War Rooms**: Project-scoped memory injection and "Passive Handshakes."
 - **Ontology**: Structured knowledge graph for anchoring ephemeral state to permanent entities.
 - **Visual Mapping**: Automated Mermaid graph generation for knowledge discovery.
+- **Comments Page**: Publishes any Markdown doc as a Tailscale-only reviewable page with inline, text-anchored commenting — the user selects exact text and leaves a note there, not a generic comment box.
 
 ### 🌐 Intelligence & Operations
 - **BlogWatcher**: Monitoring RSS/Atom feeds for industry intelligence.

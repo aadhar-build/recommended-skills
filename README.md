@@ -1,48 +1,46 @@
-# Recommended Agent Skills (aadhar-build)
+# aadhar-build-skills
 
-A curated collection of skills for high-performance multi-agent teams — a core
-"operating system" for OpenClaw and Claude Code agent instances.
+Agent skills used by Aadhar's OpenClaw and Claude Code instances.
 
-## Structure
+## The organising axis: authorship
 
-Skills are organised into **topic folders**, modelled on the taxonomy used by
-[mattpocock/skills](https://github.com/mattpocock/skills). Every skill lives at
-`<category>/<skill-name>/SKILL.md`.
+The top level of this repo is split by **who wrote the skill**, not by what it does.
 
-The three lifecycle folders (`misc/`, `in-progress/`, `deprecated/`) each carry their
-own README explaining exactly when a skill moves in or out.
-
-| Folder | What lives here |
+| Location | What lives there |
 | --- | --- |
-| `engineering/` | Writing, reviewing, debugging and shipping code |
-| `knowledge/` | Capturing, connecting and querying accumulated knowledge |
-| `integrations/` | Driving an external tool, service or feed |
-| `productivity/` | Working *with the human* — review, consensus, planning |
-| `misc/` | Live and recommended, but no clear category yet |
-| `in-progress/` | Draft or under trial — not yet recommended |
-| `deprecated/` | Superseded or retired — kept, never deleted |
+| Topic folders at the repo root (`engineering/`, `knowledge/`, `integrations/`, `productivity/`) | **Skills built here.** Originally authored for this setup — the idea, the protocol and the text are ours. |
+| `misc/recommended/` | **Skills copied from, or inspired by, someone else.** Vendored upstream skills, ports, and skills derived from another person's framework — kept because they are good, credited because they aren't ours. |
 
-This replaces the previous flat layout. The old informal README groupings map across
-directly: *Engineering & Execution* → `engineering/`, *Coordination & Knowledge
-(Wiki-Mesh)* → `knowledge/`, *Intelligence & Operations* → `integrations/`.
+Own skills keep their **topic folder**, so each still lives at
+`<category>/<skill-name>/SKILL.md`. Third-party skills live flat at
+`misc/recommended/<skill-name>/SKILL.md` — they are not re-categorised by topic.
+
+### Which side does a new skill belong on?
+
+Put it in `misc/recommended/` if **any** of these are true:
+
+- It was copied (verbatim or lightly edited) from another repo, marketplace or bundled
+  distribution — e.g. an OpenClaw bundled skill, a `mattpocock/skills` skill, a ClawHub
+  install.
+- It is a port or re-implementation of someone else's named framework or workflow.
+- Its substance is another person's published method, even if the file was typed here.
+
+Otherwise it belongs in a topic folder at the root. If a copied skill is eventually
+rewritten far enough that nothing of the original remains, it can be promoted out of
+`misc/recommended/` into a topic folder — note that in the skill's own `SKILL.md`.
 
 ---
 
-## engineering/
+## Own skills
 
+### engineering/
 Code gets written, reviewed, diagnosed and shipped here.
 
-- **coding-agent** — Delegate coding tasks to Codex, Claude Code, or Pi agents via background process.
-- **github** — GitHub operations via the `gh` CLI: issues, PRs, CI runs, code review, API queries.
 - **heal** — Trigger a self-heal diagnostic on a CI failure log or error. Hypothesis-first; never edits before root cause is confirmed.
 - **hypothesis** — Force hypothesis-first root-cause diagnosis before any file edits.
-- **karpathy-filter** — Engineering guidelines that reduce common LLM coding mistakes: surgical changes, simplicity first, no speculative abstraction.
-- **superpowers-mode** — Strict engineering workflow: clarify goal → spec → plan → small steps (prefer TDD) → review.
 - **swarm** — Parallel 5-agent code review on the current branch diff vs master.
-- **wayfinder** — Plan a chunk of work too big for one agent session as a shared map of decision tickets on the issue tracker. *(Vendored from mattpocock/skills, where it also lives under `engineering/`.)*
 
-## knowledge/
-
+### knowledge/
 The wiki-mesh cluster: turning sources, findings and project state into a durable,
 queryable graph.
 
@@ -53,25 +51,40 @@ queryable graph.
 - **wiki-lint** — Health-check the wiki and surface emergent concept pages.
 - **wiki-blog** — Generate a blog post scaffold from the wiki, filed back as a synthesis page.
 
-## integrations/
+### integrations/
+Thin, well-documented drivers over one external surface each.
 
-Each of these is a thin, well-documented driver over one external surface.
-
-- **gog** — Google Workspace CLI: Gmail, Calendar, Drive, Contacts, Sheets, Docs.
-- **slack** — Control Slack: reactions, pinning, channel and DM operations.
-- **gemini** — Gemini CLI for one-shot Q&A, summaries and generation.
 - **blogwatcher** — Monitor blogs and RSS/Atom feeds for updates.
 
-## productivity/
-
+### productivity/
 Skills whose output is consumed by a human, not by another agent.
 
 - **comments-page** — Publish any Markdown doc as a Tailscale-only reviewable page with inline, text-anchored commenting.
 
-## misc/ · in-progress/ · deprecated/
+---
 
-Currently empty of skills. See each folder's README for the rules on when something
-moves in — and, for `in-progress/`, when it moves back out.
+## misc/recommended/ — copied or inspired
+
+Kept and recommended, but authored elsewhere. See `misc/README.md` for the rules.
+
+- **coding-agent** — Delegate coding tasks to Codex, Claude Code, or Pi agents via background process. *(OpenClaw bundled skill, locally edited.)*
+- **github** — GitHub operations via the `gh` CLI. *(OpenClaw bundled skill, locally edited.)*
+- **gog** — Google Workspace CLI: Gmail, Calendar, Drive, Contacts, Sheets, Docs. *(OpenClaw bundled skill, effectively verbatim.)*
+- **slack** — Control Slack: reactions, pinning, channel and DM operations. *(OpenClaw bundled skill, locally edited.)*
+- **gemini** — Gemini CLI for one-shot Q&A, summaries and generation. *(OpenClaw bundled skill, locally edited.)*
+- **karpathy-filter** — Engineering guidelines that reduce common LLM coding mistakes. *(Derived from Andrej Karpathy's published observations.)*
+- **superpowers-mode** — Strict engineering workflow: clarify goal → spec → plan → small steps (prefer TDD) → review. *(Port of `obra/superpowers`; same skill as the published `superpowers-mode` ClawHub package.)*
+- **wayfinder** — Plan a chunk of work too big for one agent session as a shared map of decision tickets. *(Vendored from `mattpocock/skills`, MIT.)*
+
+---
+
+## Lifecycle folders
+
+- `misc/` — third-party skills under `misc/recommended/`, plus the original "no clear topic yet" landing zone for own skills.
+- `in-progress/` — draft or under trial, not yet recommended.
+- `deprecated/` — superseded or retired, kept and never deleted.
+
+Each carries its own README with the rules for moving in and out.
 
 ---
 
@@ -81,6 +94,8 @@ moves in — and, for `in-progress/`, when it moves back out.
 2. Read the `SKILL.md` in each skill directory for configuration requirements.
 3. Enable the skills you want in your agent persona files.
 
-Note that skill paths are now `<category>/<skill>/SKILL.md`, not `<skill>/SKILL.md`.
-Any script, permission entry, or raw.githubusercontent URL pinned to the old flat
-path needs updating.
+Skill paths are `<category>/<skill>/SKILL.md` for own skills and
+`misc/recommended/<skill>/SKILL.md` for copied ones. Any script, permission entry, or
+raw URL pinned to an older path — flat, or the earlier topic-only layout — needs updating.
+The repository was also renamed from `recommended-skills` to `aadhar-build-skills`;
+GitHub redirects the old name, but pinned URLs are better updated.

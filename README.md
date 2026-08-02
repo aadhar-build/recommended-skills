@@ -77,6 +77,7 @@ Kept and recommended, but authored elsewhere. See `misc/README.md` for the rules
 - **wayfinder** — Plan a chunk of work too big for one agent session as a shared map of decision tickets. *(Vendored from `mattpocock/skills`, MIT.)*
 - **adhd** — Parallel divergent ideation: spawn isolated idea branches under different cognitive frames, score, cluster, prune traps and deepen the survivors. *(Vendored from `UditAkhourii/adhd`, MIT, by Udit Akhouri; upstream `main` at `eaeba4e98b38`.)*
 - **llm-council** — Run a question through a council of five advisors who analyse it independently, peer-review each other anonymously, then synthesise a final verdict. *(Vendored from `aiwithremy/claude-skills-llm-council`, by Ole Lehmann; methodology adapted from Andrej Karpathy's `karpathy/llm-council`. Upstream declares no licence.)*
+- **impeccable** — Design, critique and polish frontend interfaces: visual hierarchy, accessibility, responsive behaviour, motion, UX copy and reusable design tokens. *(Vendored from `pbakaus/impeccable`, Apache-2.0, by Paul Bakaus, v4.0.4; upstream `main` at `c5e1ddd`.)*
 
 ---
 

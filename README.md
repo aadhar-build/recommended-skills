@@ -100,5 +100,9 @@ Each carries its own README with the rules for moving in and out.
 Skill paths are `<category>/<skill>/SKILL.md` for own skills and
 `misc/recommended/<skill>/SKILL.md` for copied ones. Any script, permission entry, or
 raw URL pinned to an older path — flat, or the earlier topic-only layout — needs updating.
+Three paths moved on 2026-08-02 and any pin to them is now stale:
+`integrations/blogwatcher` → `misc/recommended/blogwatcher`,
+`knowledge/ontology` → `deprecated/ontology`, and
+`knowledge/wiki-mesh` → `deprecated/wiki-mesh`.
 The repository was also renamed from `recommended-skills` to `aadhar-build-skills`;
 GitHub redirects the old name, but pinned URLs are better updated.

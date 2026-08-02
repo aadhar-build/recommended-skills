@@ -1,3 +1,5 @@
+> Deprecated 2026-08-02 — superseded own work; the ontology-mesh experiment is no longer maintained or installed.
+
 # Skill: Ontology-Mesh (Phase 3)
 Use this skill to anchor ephemeral project thinking to a permanent semantic backbone.
 

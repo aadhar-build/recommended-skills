@@ -41,11 +41,9 @@ Code gets written, reviewed, diagnosed and shipped here.
 - **swarm** — Parallel 5-agent code review on the current branch diff vs master.
 
 ### knowledge/
-The wiki-mesh cluster: turning sources, findings and project state into a durable,
+The wiki cluster: turning sources, findings and project state into a durable,
 queryable graph.
 
-- **ontology** — Anchor ephemeral project thinking to a permanent semantic backbone of entities.
-- **wiki-mesh** — Participate in a "Project War Room" by tagging findings and retrieving synthesised project context.
 - **wiki-ingest** — Ingest a new source (book, paper, talk, project) into the wiki using the compounding-graph protocol.
 - **wiki-query** — Answer a question from the wiki, then file the answer back as a synthesis page.
 - **wiki-lint** — Health-check the wiki and surface emergent concept pages.
@@ -54,7 +52,8 @@ queryable graph.
 ### integrations/
 Thin, well-documented drivers over one external surface each.
 
-- **blogwatcher** — Monitor blogs and RSS/Atom feeds for updates.
+_Currently empty — `blogwatcher` moved to `misc/recommended/` on 2026-08-02 once it was
+confirmed to be a third-party skill. The category stays open for future own drivers._
 
 ### productivity/
 Skills whose output is consumed by a human, not by another agent.
@@ -67,6 +66,7 @@ Skills whose output is consumed by a human, not by another agent.
 
 Kept and recommended, but authored elsewhere. See `misc/README.md` for the rules.
 
+- **blogwatcher** — Monitor blogs and RSS/Atom feeds for updates. *(OpenClaw bundled skill; upstream `Hyaxia/blogwatcher`. Differs from the bundled copy on one line only.)*
 - **coding-agent** — Delegate coding tasks to Codex, Claude Code, or Pi agents via background process. *(OpenClaw bundled skill, locally edited.)*
 - **github** — GitHub operations via the `gh` CLI. *(OpenClaw bundled skill, locally edited.)*
 - **gog** — Google Workspace CLI: Gmail, Calendar, Drive, Contacts, Sheets, Docs. *(OpenClaw bundled skill, effectively verbatim.)*
@@ -83,8 +83,9 @@ Kept and recommended, but authored elsewhere. See `misc/README.md` for the rules
 ## Lifecycle folders
 
 - `misc/` — third-party skills under `misc/recommended/`, plus the original "no clear topic yet" landing zone for own skills.
-- `in-progress/` — draft or under trial, not yet recommended.
-- `deprecated/` — superseded or retired, kept and never deleted.
+- `in-progress/` — draft or under trial, not yet recommended. Currently holds no skills.
+- `deprecated/` — superseded or retired, kept and never deleted. Currently holds
+  **ontology** and **wiki-mesh** (own work, superseded 2026-08-02).
 
 Each carries its own README with the rules for moving in and out.
 

@@ -1,3 +1,5 @@
+> Deprecated 2026-08-02 — superseded own work; the wiki-mesh war-room protocol is no longer maintained or installed.
+
 # Skill: Wiki-Mesh
 Use this skill to participate in a "Project War Room" by tagging critical findings and retrieving synthesized project context.
 

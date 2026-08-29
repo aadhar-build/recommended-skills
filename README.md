@@ -39,6 +39,7 @@ Code gets written, reviewed, diagnosed and shipped here.
 - **heal** — Trigger a self-heal diagnostic on a CI failure log or error. Hypothesis-first; never edits before root cause is confirmed.
 - **hypothesis** — Force hypothesis-first root-cause diagnosis before any file edits.
 - **swarm** — Parallel 5-agent code review on the current branch diff vs master.
+- **playwright-cli** — Author, maintain, and run a persistent, CI-runnable Playwright test suite from the command line: `.spec.ts` files, codegen-recorded flows, `npx playwright test`. Distinct from the `playwright` MCP plugin, which drives a live browser interactively and leaves nothing behind in the repo.
 
 ### knowledge/
 The wiki cluster: turning sources, findings and project state into a durable,

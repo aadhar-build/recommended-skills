@@ -73,8 +73,6 @@ Kept and recommended, but authored elsewhere. See `misc/README.md` for the rules
 - **slack** — Control Slack: reactions, pinning, channel and DM operations. *(OpenClaw bundled skill, locally edited.)*
 - **gemini** — Gemini CLI for one-shot Q&A, summaries and generation. *(OpenClaw bundled skill, locally edited.)*
 - **karpathy-filter** — Engineering guidelines that reduce common LLM coding mistakes. *(Derived from Andrej Karpathy's published observations.)*
-- **superpowers-mode** — Strict engineering workflow: clarify goal → spec → plan → small steps (prefer TDD) → review. *(Port of `obra/superpowers`; same skill as the published `superpowers-mode` ClawHub package.)*
-- **wayfinder** — Plan a chunk of work too big for one agent session as a shared map of decision tickets. *(Vendored from `mattpocock/skills`, MIT.)*
 - **adhd** — Parallel divergent ideation: spawn isolated idea branches under different cognitive frames, score, cluster, prune traps and deepen the survivors. *(Vendored from `UditAkhourii/adhd`, MIT, by Udit Akhouri; upstream `main` at `eaeba4e98b38`.)*
 - **llm-council** — Run a question through a council of five advisors who analyse it independently, peer-review each other anonymously, then synthesise a final verdict. *(Vendored from `aiwithremy/claude-skills-llm-council`, by Ole Lehmann; methodology adapted from Andrej Karpathy's `karpathy/llm-council`. Upstream declares no licence.)*
 - **impeccable** — Design, critique and polish frontend interfaces: visual hierarchy, accessibility, responsive behaviour, motion, UX copy and reusable design tokens. *(Vendored from `pbakaus/impeccable`, Apache-2.0, by Paul Bakaus, v4.0.4; upstream `main` at `c5e1ddd`.)*
@@ -86,7 +84,10 @@ Kept and recommended, but authored elsewhere. See `misc/README.md` for the rules
 - `misc/` — third-party skills under `misc/recommended/`, plus the original "no clear topic yet" landing zone for own skills.
 - `in-progress/` — draft or under trial, not yet recommended. Currently holds no skills.
 - `deprecated/` — superseded or retired, kept and never deleted. Currently holds
-  **ontology** and **wiki-mesh** (own work, superseded 2026-08-02).
+  **ontology** and **wiki-mesh** (own work, superseded 2026-08-02), and **wayfinder** and
+  **superpowers-mode** (both `misc/recommended/`, superseded 2026-08-30 — each duplicates a
+  skill already shipped by an installed plugin: `wayfinder` by `mattpocock-skills`,
+  `superpowers-mode` by the always-on `superpowers` plugin).
 
 Each carries its own README with the rules for moving in and out.
 
@@ -105,5 +106,8 @@ Three paths moved on 2026-08-02 and any pin to them is now stale:
 `integrations/blogwatcher` → `misc/recommended/blogwatcher`,
 `knowledge/ontology` → `deprecated/ontology`, and
 `knowledge/wiki-mesh` → `deprecated/wiki-mesh`.
+Two more paths moved on 2026-08-30:
+`misc/recommended/wayfinder` → `deprecated/wayfinder`, and
+`misc/recommended/superpowers-mode` → `deprecated/superpowers-mode`.
 The repository was also renamed from `recommended-skills` to `aadhar-build-skills`;
 GitHub redirects the old name, but pinned URLs are better updated.

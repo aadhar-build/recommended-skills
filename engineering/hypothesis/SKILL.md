@@ -1,6 +1,7 @@
 ---
 name: hypothesis
 description: "Force hypothesis-first root-cause diagnosis before any file edits. Use when: (1) handing off a tricky bug, (2) the first instinct is to start editing without understanding, (3) a CI failure needs root cause before a fix. NOT for: simple one-liner fixes where the cause is obvious."
+disable-model-invocation: true
 ---
 
 # Hypothesis

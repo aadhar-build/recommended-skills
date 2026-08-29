@@ -1,6 +1,7 @@
 ---
 name: heal
 description: "Trigger a self-heal diagnostic on a CI failure log or error. Hypothesis-first. Never edits a file before the root cause is confirmed. Use when: (1) CI is red and the cause isn't obvious, (2) a test is flaking and you want structured diagnosis, (3) handing off a known failure to fix autonomously. NOT for: errors with an obvious fix (just fix them), or when you need a human decision on approach."
+disable-model-invocation: true
 ---
 
 # Heal

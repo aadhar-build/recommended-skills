@@ -1,7 +1,10 @@
 ---
 name: superpowers-mode
 description: Enable or disable a strict engineering workflow inspired by obra/superpowers when the user explicitly asks (e.g., "включи superpowers", "disable superpowers"). When enabled and the task is coding/build/debug, enforce: clarify goal, write spec, write plan, execute in small steps (prefer TDD), then review/finish. Use this skill only for coding workflows, not general chat.
+disable-model-invocation: true
 ---
+
+> Deprecated 2026-08-30 — superseded by the `superpowers` plugin (obra/superpowers), which is installed and always-on via its `using-superpowers` SessionStart hook. Running both would mean two competing sources for the same "strict engineering workflow" philosophy.
 
 # Superpowers Mode (On-demand)
 
